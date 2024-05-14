@@ -65,4 +65,18 @@ const uploadJson = async (req, res) => {
     }
 };
 
-export default { getModeratedContent, startModeration, uploadJson };
+const deleteContent = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const content = await Content.findByPk(id);
+        if (!content) {
+            return res.status(404).json({ message: 'Content not found' });
+        }
+        await content.destroy();
+        res.status(200).json({ message: 'Content deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting content', error: error.message });
+    }
+};
+
+export default { getModeratedContent, startModeration, uploadJson, deleteContent };
