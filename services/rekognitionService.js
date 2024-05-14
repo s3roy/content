@@ -26,9 +26,11 @@ const moderateImage = async (image) => {
         console.log('Moderation result:', result);
 
         const hasInappropriateContent = result.ModerationLabels.length > 0;
+        const labels = result.ModerationLabels.map(label => label.Name).join(', ');
+
         return {
             status: hasInappropriateContent ? 'Rejected' : 'Accepted',
-            reason: hasInappropriateContent ? 'Inappropriate content detected' : '',
+            reason: hasInappropriateContent ? labels : 'Inappropriate content',
         };
     } catch (error) {
         console.error('Error moderating image:', error.message);

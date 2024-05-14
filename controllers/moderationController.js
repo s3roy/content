@@ -44,14 +44,13 @@ const uploadJson = async (req, res) => {
 
     try {
         for (const content of contentArray) {
-            if (!content.id || !content.streamerId || !content.url) {
-                res.status(400).json({ message: 'Invalid JSON object format. Each object must contain id, streamerId, and url.' });
+            if (!content.streamerId || !content.url) {
+                res.status(400).json({ message: 'Invalid JSON object format. Each object must contain streamerId, and url.' });
                 return;
             }
 
             const moderationResult = await moderateContent(content);
             await Content.create({
-                id: content.id,
                 streamerId: content.streamerId,
                 contentUrl: content.url,
                 status: moderationResult.status,

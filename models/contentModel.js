@@ -2,8 +2,13 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../utils/database.js';
 
 const Content = sequelize.define('Content', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     streamerId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     contentUrl: {
@@ -15,15 +20,12 @@ const Content = sequelize.define('Content', {
         allowNull: false,
     },
     reason: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,  // Updated to TEXT
+        allowNull: true,
     },
     type: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
     },
 });
 
