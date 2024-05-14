@@ -30,7 +30,7 @@ const moderateImage = async (image) => {
 
         return {
             status: hasInappropriateContent ? 'Rejected' : 'Accepted',
-            reason: hasInappropriateContent ? labels : 'Inappropriate content',
+            reason: hasInappropriateContent ? labels : '',
         };
     } catch (error) {
         console.error('Error moderating image:', error.message);
